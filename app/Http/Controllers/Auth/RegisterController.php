@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
+	public function showRegistrationForm() {
+		abort(403);
+	}
     /*
     |--------------------------------------------------------------------------
     | Register Controller

@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('top');
 });
+Route::post('/entry','EntryController@setentry');
+Route::get('/entry','EntryController@getentry');
+Route::post('/status','EntryController@upstatus');
+Route::get('/status', 'EntryController@getstatus');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
