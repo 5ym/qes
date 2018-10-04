@@ -1,0 +1,2 @@
+# QRcode Entry System
+laravelの勉強用にQRcodeで入場支払い管理できる簡易的なものを作成してみました
