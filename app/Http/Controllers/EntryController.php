@@ -4,6 +4,22 @@ namespace App\Http\Controllers;
 
 class EntryController extends Controller
 {
+	public function swi($status) {
+		switch($status) {
+			case 0:
+				return 'unpaid, unentry';
+				break;
+			case 1:
+				return 'unpaid, entry';
+				break;
+			case 2:
+				return 'paid, unentry';
+				break;
+			case 3:
+				return 'paid, entry';
+				break;
+		}
+	}
     public function setentry() {
 			$count = 1;
 			$randum = 0;
@@ -31,31 +47,38 @@ class EntryController extends Controller
 			abort(403);
 		}
 		public function upstatus() {
-			return;
+			$res = \App\entry::where('randum', $_POST['secret']);
+			switch($_POST['status']) {
+				case 'pay':
+					if($res->get()[0]->status<2) {
+						$res->update(['status'=>$res->get()[0]->status+2]);
+					} else {
+						$res->update(['status'=>$res->get()[0]->status-2]);
+					}
+					break;
+				case 'entry':
+					if($res->get()[0]->status<1) {
+						$res->update(['status'=>$res->get()[0]->status+1]);
+					} else {
+						$res->update(['status'=>$res->get()[0]->status-1]);
+					}
+					break;
+				case 'pe':
+					$res->update(['status'=>3]);
+					break;
+			}
+			return json_encode(['status'=>$this->swi($res->get()[0]->status)]);
 		}
 		public function getstatus() {
 			if(!$_GET)
 			 abort(403);
 			$row = \App\entry::where('randum', $_GET['secret'])->get();
-			switch($row[0]->status) {
-				case 0:
-					$status = 'unpaid, unentry';
-					break;
-				case 1:
-					$status = 'unpaid, entry';
-					break;
-				case 2:
-					$status = 'paid, unentry';
-					break;
-				case 3:
-					$status = 'paid, entry';
-					break;
-			}
 			return view('status')->with([
 				'name'=>$row[0]->name,
 				'contact'=>$row[0]->contact,
 				'address'=>$row[0]->address,
-				'status'=>$status
+				'status'=>$this->swi($row[0]->status),
+				'secret'=>$row[0]->randum
 			]);
 		}
 }
