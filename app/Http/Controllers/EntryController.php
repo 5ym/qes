@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-class EntryController extends Controller
-{
-	public function swi($status) {
-		switch($status) {
-			case 0:
-				return 'unpaid, unentry';
-				break;
-			case 1:
-				return 'unpaid, entry';
-				break;
-			case 2:
-				return 'paid, unentry';
-				break;
-			case 3:
-				return 'paid, entry';
-				break;
-		}
+function swi($status) {
+	switch($status) {
+		case 0:
+			return 'unpaid, unentry';
+			break;
+		case 1:
+			return 'unpaid, entry';
+			break;
+		case 2:
+			return 'paid, unentry';
+			break;
+		case 3:
+			return 'paid, entry';
+			break;
 	}
+}
+
+class EntryController extends Controller {
     public function setentry() {
 			$count = 1;
 			$randum = 0;
@@ -67,7 +67,7 @@ class EntryController extends Controller
 					$res->update(['status'=>3]);
 					break;
 			}
-			return json_encode(['status'=>$this->swi($res->get()[0]->status)]);
+			return json_encode(['status'=>swi($res->get()[0]->status)]);
 		}
 		public function getstatus() {
 			if(!$_GET)
@@ -77,8 +77,18 @@ class EntryController extends Controller
 				'name'=>$row[0]->name,
 				'contact'=>$row[0]->contact,
 				'address'=>$row[0]->address,
-				'status'=>$this->swi($row[0]->status),
+				'status'=>swi($row[0]->status),
 				'secret'=>$row[0]->randum
 			]);
+		}
+		public function list() {
+			return view('list')->with(['list'=>\App\entry::all()]);
+		}
+		public function liststatus() {
+			$status = [];
+			foreach(\App\entry::get(['status', 'randum']) as $value) {
+				$status += [$value->randum=>swi($value->status)];
+			}
+			return $status;
 		}
 }

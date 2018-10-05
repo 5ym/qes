@@ -18,6 +18,8 @@ Route::post('/entry','EntryController@setentry');
 Route::get('/entry','EntryController@getentry');
 Route::post('/status','EntryController@upstatus');
 Route::get('/status', 'EntryController@getstatus');
+Route::post('/list', 'EntryController@liststatus');
+Route::get('/list', 'EntryController@list');
 
 Auth::routes();
 
