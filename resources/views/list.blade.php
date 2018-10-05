@@ -1,6 +1,7 @@
 <?php if(!Auth::check()) header("Location: /login"); ?>
 @extends('wire')
 @section('content')
+	<h1>List</h1>
 	<table>
 		<thead><tr><th>Name</th><th>Contact</th><th>Address</th><th>Secret</th><th>Status</th></tr></thead>
 		<tbody>

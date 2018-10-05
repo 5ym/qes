@@ -38,8 +38,7 @@ class EntryController extends Controller {
 			return $flight;
 		}
 		public function getentry() {
-			if(!$_GET)
-			 abort(403);
+			if(!$_GET) abort(403);
 			$count = \App\entry::where('randum', $_GET['secret'])->get()->count();
 			if(0<$count) {
 				return json_encode(['status'=>'success']);

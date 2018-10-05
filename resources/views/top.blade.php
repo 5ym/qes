@@ -28,13 +28,13 @@
 	<div id="qrcode"></div>
 	<script>
 		var jqxhr;
+		$.ajaxSetup({headers: {
+			'X-CSRF-TOKEN': '{{ csrf_token() }}'
+		}});
 		$('#entry').on('submit', function() {
 			event.preventDefault();
 			if(jqxhr) return;
 			$("form").find("button").addClass("disabled");
-			$.ajaxSetup({headers: {
-				'X-CSRF-TOKEN': '{{ csrf_token() }}'
-	　　	}});
 			jqxhr = $.ajax({
 				url: "/entry",
 				type: "POST",
@@ -57,9 +57,6 @@
 			event.preventDefault();
 			if(jqxhr) return;
 			$("form").find("button").addClass("disabled");
-			$.ajaxSetup({headers: {
-				'X-CSRF-TOKEN': '{{ csrf_token() }}'
-	　　	}});
 			secret = $(this).find('input').val();
 			jqxhr = $.ajax({
 				url: "/entry?secret="+secret,
