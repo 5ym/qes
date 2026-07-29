@@ -1,4 +1,3 @@
-<?php if(!Auth::check()) header("Location: /login"); ?>
 @extends('wire')
 @section('content')
 	<h1>status</h1>
