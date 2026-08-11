@@ -1,19 +1,35 @@
 {
-    "$schema": "https://www.schemastore.org/package.json",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "build": "vite build",
-        "dev": "vite"
-    },
-    "devDependencies": {
-        "@popperjs/core": "^2.11.6",
-        "@vitejs/plugin-vue": "^6.0.0",
-        "axios": "^1.0.0",
-        "bootstrap": "^5.2.3",
-        "laravel-vite-plugin": "^3.1",
-        "sass-embedded": "^1.93.0",
-        "vite": "^8.0.0",
-        "vue": "^3.0.0"
-    }
+	"name": "qes",
+	"version": "2.0.0",
+	"private": true,
+	"type": "module",
+	"description": "QRcode Entry System — QRコードで入場・支払を管理する簡易システム",
+	"repository": "github:5ym/qes",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"start": "bun ./build/index.js",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --tsgo",
+		"lint": "biome check .",
+		"format": "biome check --write .",
+		"db:seed": "bun run src/lib/server/db/seed.ts"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.8",
+		"@sveltejs/adapter-node": "^5.5.7",
+		"@sveltejs/kit": "^2.70.2",
+		"@sveltejs/vite-plugin-svelte": "^7.3.0",
+		"@tailwindcss/vite": "^4.3.3",
+		"@types/bun": "^1.3.14",
+		"@types/qrcode": "^1.5.6",
+		"@typescript/native": "npm:typescript@7",
+		"daisyui": "^5.7.16",
+		"qrcode": "^1.5.4",
+		"svelte": "^5.56.8",
+		"svelte-check": "^4.7.5",
+		"tailwindcss": "^4.3.3",
+		"typescript": "~6.0.3",
+		"vite": "^8.2.1"
+	}
 }

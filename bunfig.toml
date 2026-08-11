@@ -1,0 +1,4 @@
+# Ensure Vite's dev/build SSR pipeline runs on the Bun runtime so that
+# `bun:sqlite` (used by the Drizzle SQLite driver) resolves correctly.
+[run]
+bun = true
