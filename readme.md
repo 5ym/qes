@@ -3,7 +3,7 @@
 QRコードで入場・支払を管理できる簡易システム。
 
 元の **Laravel(PHP)+ jQuery + Materialize** 構成から
-**SvelteKit(Svelte 5)+ Bun + SQLite + DaisyUI + Biome** へ全面的に書き換えたものです。
+**SvelteKit(Svelte 5)+ Bun + SQLite + Pico CSS + Biome** へ全面的に書き換えたものです。
 
 ## 技術スタック
 
@@ -12,7 +12,7 @@ QRコードで入場・支払を管理できる簡易システム。
 | ランタイム     | Bun 1.3+                                        |
 | フレームワーク | SvelteKit(Svelte 5 / runes)+ adapter-node     |
 | データベース   | SQLite(`bun:sqlite`、生SQL)                   |
-| UI             | Tailwind CSS v4 + DaisyUI v5                    |
+| UI             | Pico CSS v2(SCSS)+ 自前スタイル               |
 | 認証           | サーバーサイドセッション + `Bun.password`       |
 | Lint/Format    | Biome                                           |
 | QR             | `qrcode`(クライアントで生成)                  |
