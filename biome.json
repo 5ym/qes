@@ -15,7 +15,7 @@
 			"!**/bun.lock",
 			"!static",
 			"!**/*.svg",
-			"!src/app.css"
+			"!src/app.scss"
 		]
 	},
 	"formatter": {

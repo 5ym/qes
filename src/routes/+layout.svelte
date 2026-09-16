@@ -1,5 +1,5 @@
 <script lang="ts">
-import '../app.css';
+import '../app.scss';
 import { enhance } from '$app/forms';
 import { page } from '$app/state';
 
@@ -7,31 +7,70 @@ let { children } = $props();
 const user = $derived(page.data.user);
 </script>
 
-<div class="bg-base-200 flex min-h-dvh flex-col">
-	<header class="navbar bg-base-100 border-base-300 border-b shadow-sm">
-		<div class="mx-auto flex w-full max-w-4xl items-center px-4">
-			<a href="/" class="btn btn-ghost text-xl font-bold">
-				<span class="text-primary">QR</span>
+<div class="shell">
+	<header class="bar">
+		<div class="page cluster">
+			<a href="/" class="button ghost brand">
+				<span class="qr">QR</span>
 				Entry System
 			</a>
-			<div class="flex-1"></div>
+			<div class="grow"></div>
 			{#if user}
-				<a href="/list" class="btn btn-ghost btn-sm">一覧</a>
-				<span class="hidden text-sm opacity-70 sm:inline">{user.email}</span>
-				<form method="POST" action="/logout" use:enhance class="inline">
-					<button type="submit" class="btn btn-outline btn-sm">ログアウト</button>
+				<a href="/list" class="button ghost mini">一覧</a>
+				<span class="mail small muted">{user.email}</span>
+				<form method="POST" action="/logout" use:enhance>
+					<button type="submit" class="outline mini">ログアウト</button>
 				</form>
 			{:else}
-				<a href="/login" class="btn btn-primary btn-sm">スタッフログイン</a>
+				<a href="/login" class="button mini">スタッフログイン</a>
 			{/if}
 		</div>
 	</header>
 
-	<main class="mx-auto w-full max-w-4xl flex-1 px-4 py-8">
+	<main class="page main">
 		{@render children()}
 	</main>
 
-	<footer class="footer footer-center text-base-content/60 p-4 text-sm">
-		<aside><p>QR Entry System · SvelteKit + Bun + SQLite + DaisyUI</p></aside>
+	<footer class="foot small muted">
+		<p>QR Entry System · SvelteKit + Bun + SQLite + Pico CSS</p>
 	</footer>
 </div>
+
+<style>
+/* 画面いっぱいに縦積みして、main だけ伸ばす。footer を下端に貼り付けるため */
+.shell {
+	display: flex;
+	flex-direction: column;
+	min-height: 100dvh;
+	background: var(--pico-background-color);
+}
+.bar {
+	border-bottom: 1px solid var(--ui-base-300);
+	background: var(--ui-surface);
+	box-shadow: var(--ui-shadow);
+	padding-block: 0.5rem;
+}
+.brand {
+	font-size: 1.25rem;
+}
+.qr {
+	color: var(--pico-primary);
+}
+/* メールアドレスは狭い画面では出さない(ボタンを押しやすさ優先) */
+.mail {
+	display: none;
+}
+@media (min-width: 640px) {
+	.mail {
+		display: inline;
+	}
+}
+.main {
+	flex: 1 1 auto;
+	padding-block: 2rem;
+}
+.foot {
+	padding: 1rem;
+	text-align: center;
+}
+</style>
